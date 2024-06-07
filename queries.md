@@ -12,7 +12,7 @@
 
 { "number_of_employees": -1 }
 
-.limit(20)
+{ limit: 20 }
 
 ### 3. All the companies founded between 2000 and 2005, both years included. Retrieve only the `name` and `founded_year` fields.
 
@@ -52,19 +52,21 @@
 
 ### 9. Order all the companies by their IPO price in a descending order.
 
-{ "ipo.valuation_amount": -1 }
+{
+  "sort": { "ipo.valuation_amount": -1 }
+}
 
 ### 10. Retrieve the 10 companies with most employees, order by the `number of employees`
 
 { "number_of_employees": -1 }
 
-.limit(10)
+{ limit: 10 }
 
 ### 11. All the companies founded on the second semester of the year. Limit your search to 1000 companies.
 
 { "founded_month": { "$gte": 7 } }
 
-.limit(1000)
+{ limit: 1000 }
 
 ### 12. All the companies founded before 2000 that have an acquisition amount of more than 10.000.000
 
@@ -91,7 +93,7 @@
 
 { "acquisition.price_amount": -1 }
 
-.limit(10)
+{ limit: 10 }
 
 ### 16. All the companies on the 'web' `category` that have more than 4000 employees. Sort them by the amount of employees in ascending order.
 
@@ -112,13 +114,13 @@
 
 { "name": 1, "acquisition": 1, "_id": 0 }
 
-.limit(10)
+{ limit: 10 }
 
 ### 19. All the companies that have been founded between 2000 and 2010, but have not been acquired before 2011.
 
 
- {
+ { 
     "founded_year": { "$gte": 2000, "$lte": 2010 }, 
-    "acquisition.acquired_year": { "$lt": 2011, "$exists": true } 
+    "acquisition.acquired_year": { "$not": { "$lt": 2011 } }
   }
 
